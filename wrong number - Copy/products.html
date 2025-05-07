@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Products - Crusty Crust Bakery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2A4365', // Deep blue
+                        secondary: '#4A5568', // Gray
+                        accent: '#EDF2F7', // Light gray
+                        highlight: '#ED8936', // Orange accent
+                        light: '#F7FAFC'
+                    },
+                    fontFamily: {
+                        'sans': ['Poppins', 'sans-serif'],
+                        'display': ['Montserrat', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #F7FAFC;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .page-header {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1555507036-ab1f4038808a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1026&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .product-card {
+            transition: all 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .fade-in.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .staggered-delay-1 {
+            transition-delay: 0.1s;
+        }
+        
+        .staggered-delay-2 {
+            transition-delay: 0.2s;
+        }
+        
+        .staggered-delay-3 {
+            transition-delay: 0.3s;
+        }
+        
+        .nav-link {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #ED8936;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            transform: translateX(0);
+        }
+        
+        .filter-button {
+            transition: all 0.3s ease;
+        }
+        
+        .filter-button.active {
+            background-color: #2A4365;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center">
+                    <span class="text-primary text-2xl font-bold font-display tracking-wider">CRUSTY<span class="text-highlight">CRUST</span></span>
+                </a>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link text-secondary hover:text-primary transition">Home</a>
+                    <a href="about.html" class="nav-link text-secondary hover:text-primary transition">About</a>
+                    <a href="products.html" class="nav-link text-primary font-medium">Products</a>
+                    <a href="contact.html" class="nav-link text-secondary hover:text-primary transition">Contact</a>
+                </div>
+                
+                <button id="mobile-menu-button" class="md:hidden text-secondary focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden mt-4 pb-4">
+                <a href="index.html" class="block py-2 text-secondary hover:text-primary transition">Home</a>
+                <a href="about.html" class="block py-2 text-secondary hover:text-primary transition">About</a>
+                <a href="products.html" class="block py-2 text-primary font-medium">Products</a>
+                <a href="contact.html" class="block py-2 text-secondary hover:text-primary transition">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header py-24 text-center text-white">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4 fade-in">Our Products</h1>
+        <p class="text-xl max-w-3xl mx-auto px-4 fade-in staggered-delay-1">Discover our handcrafted selection of artisan breads, pastries, and cakes</p>
+    </header>
+
+    <!-- Product Filters -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col items-center mb-12">
+                <h2 class="text-3xl font-bold text-primary mb-8 text-center fade-in">Browse Our Selection</h2>
+                
+                <!-- Search Bar -->
+                <div class="w-full max-w-md mb-8 fade-in staggered-delay-1">
+                    <div class="relative">
+                        <input type="text" id="product-search" placeholder="Search products..." class="w-full px-4 py-3 pl-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                        <div class="absolute left-4 top-3.5 text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Category Filters -->
+                <div class="flex flex-wrap justify-center gap-4 fade-in staggered-delay-2">
+                    <button class="filter-button active px-6 py-2 rounded-full border-2 border-primary text-primary hover:bg-primary hover:text-white font-medium" data-category="all">All Products</button>
+                    <button class="filter-button px-6 py-2 rounded-full border-2 border-primary text-primary hover:bg-primary hover:text-white font-medium" data-category="breads">Breads</button>
+                    <button class="filter-button px-6 py-2 rounded-full border-2 border-primary text-primary hover:bg-primary hover:text-white font-medium" data-category="pastries">Pastries</button>
+                    <button class="filter-button px-6 py-2 rounded-full border-2 border-primary text-primary hover:bg-primary hover:text-white font-medium" data-category="cakes">Cakes</button>
+                </div>
+            </div>
+            
+            <!-- Products Container -->
+            <div id="products-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Bread Products -->
+                <!-- Bread 1 -->
+                <div class="product-item bg-white rounded-xl overflow-hidden shadow-lg product-card fade-in" data-category="breads">
+                    <div class="h-64 overflow-hidden">
+                        <img src="./assets/sourdough.jpg" alt="Sourdough Bread" class="w-full h-full object-cover transition duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-primary mb-2">Artisan Sourdough Bread</h3>
+                        <p class="text-secondary mb-4">Our signature sourdough with a perfectly crisp crust and tender, airy interior.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-primary font-bold">₹350</span>
+                            <button class="text-white bg-highlight hover:bg-highlight/90 px-4 py-2 rounded transition">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Bread 2 -->
+                <div class="product-item bg-white rounded-xl overflow-hidden shadow-lg product-card fade-in" data-category="breads">
+                    <div class="h-64 overflow-hidden">
+                        <img src="./assets/multigrain.jpg" alt="Multigrain Loaf" class="w-full h-full object-cover transition duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-primary mb-2">Multigrain Loaf</h3>
+                        <p class="text-secondary mb-4">Hearty bread made with a blend of whole grains and seeds for extra nutrition and flavor.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-primary font-bold">₹300 </span>
+                            <button class="text-white bg-highlight hover:bg-highlight/90 px-4 py-2 rounded transition">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Bread 3 -->
+                <div class="product-item bg-white rounded-xl overflow-hidden shadow-lg product-card fade-in" data-category="breads">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1620921568790-c1cf8984624c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1965&q=80" alt="soft fluffy buns" class="w-full h-full object-cover transition duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-primary mb-2">Soft Fluffy Buns</h3>
+                        <p class="text-secondary mb-4">Bread with a crisp crust and soft, airy interior, perfect as sliders.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-primary font-bold">₹270                            </span>
+                            <button class="text-white bg-highlight hover:bg-highlight/90 px-4 py-2 rounded transition">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pastry Products -->
+                <!-- Pastry 1 -->
+                <div class="product-item bg-white rounded-xl overflow-hidden shadow-lg product-card fade-in" data-category="pastries">
+                    <div class="h-64 overflow-hidden">
+                        <img src="./assets/butter cros 1.jpg" alt="Croissants" class="w-full h-full object-cover transition duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-primary mb-2">Croissants</h3>
+                        <p class="text-secondary mb-4">Buttery, flaky croissants made with French butter and traditional techniques.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-primary font-bold">₹210        </span>
+                            <button class="text-white bg-highlight hover:bg-highlight/90 px-4 py-2 rounded transition">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pastry 2 -->
+                <div class="product-item bg-white rounded-xl overflow-hidden shadow-lg product-card fade-in" data-category="pastries">
+                    <div class="h-64 overflow-hidden">
+                        <img src="./assets/tp.jpg" alt="truffle pastry" class="w-full h-full object-cover transition duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-primary mb-2">Chocolate Truffle Pastry</h3>
+                        <p class="text-secondary mb-4">A rich and decadent dessert featuring layers of moist chocolate sponge, filled with silky chocolate ganache and finished with a glossy chocolate glaze.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-primary font-bold">₹170                            </span>
+                            <button class="text-white bg-highlight hover:bg-highlight/90 px-4 py-2 rounded transition">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pastry 3 -->
+                <div class="product-item bg-white rounded-xl overflow-hidden shadow-lg product-card fade-in" data-category="pastries">
+                    <div class="h-64 overflow-hidden">
+                        <img src="./assets/ft.jpg" alt="Fruit Tarts" class="w-full h-full object-cover transition duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-primary mb-2">Fruit Tarts</h3>
+                        <p class="text-secondary mb-4">Buttery tart shell filled with vanilla pastry cream and topped with fresh seasonal fruits.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-primary font-bold">₹190</span>
+                            <button class="text-white bg-highlight hover:bg-highlight/90 px-4 py-2 rounded transition">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cake Products -->
+                <!-- Cake 1 -->
+                <div class="product-item bg-white rounded-xl overflow-hidden shadow-lg product-card fade-in" data-category="cakes">
+                    <div class="h-64 overflow-hidden">
+                        <img src="./assets/dcc1.jpg" alt="Chocolate Cake" class="w-full h-full object-cover transition duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-primary mb-2">Dark Chocolate Cake</h3>
+                        <p class="text-secondary mb-4">Rich, moist chocolate cake with Belgian chocolate ganache and chocolate shavings.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-primary font-bold">₹850(500gm)</span>
+                            <button class="text-white bg-highlight hover:bg-highlight/90 px-4 py-2 rounded transition">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cake 2 -->
+                <div class="product-item bg-white rounded-xl overflow-hidden shadow-lg product-card fade-in" data-category="cakes">
+                    <div class="h-64 overflow-hidden">
+                        <img src="./assets/vanilla.jpg" alt="Vanilla Cake" class="w-full h-full object-cover transition duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-primary mb-2">Vanilla Fruit Cake</h3>
+                        <p class="text-secondary mb-4">Light vanilla sponge with Madagascar vanilla bean buttercream and fresh fruits.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-primary font-bold">₹780(500gm)</span>
+                            <button class="text-white bg-highlight hover:bg-highlight/90 px-4 py-2 rounded transition">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cake 3 -->
+                <div class="product-item bg-white rounded-xl overflow-hidden shadow-lg product-card fade-in" data-category="cakes">
+                    <div class="h-64 overflow-hidden">
+                        <img src="./assets/red cake 1.jpg" alt="Red Velvet Cake" class="w-full h-full object-cover transition duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-primary mb-2">Red Velvet Cake</h3>
+                        <p class="text-secondary mb-4">Classic red velvet with cream cheese frosting and white chocolate curls.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-primary font-bold">₹900(500)</span>
+                            <button class="text-white bg-highlight hover:bg-highlight/90 px-4 py-2 rounded transition">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- No Results Message -->
+            <div id="no-results" class="hidden text-center py-12">
+                <p class="text-xl text-secondary">No products match your search. Please try different keywords.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom Order CTA -->
+    <section class="py-16 bg-primary text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-6 fade-in">Looking for Something Special?</h2>
+            <p class="text-lg mb-8 max-w-2xl mx-auto fade-in staggered-delay-1">We love creating custom orders for special occasions. Contact us to discuss your ideas and let us create something unique for you.</p>
+            <div class="fade-in staggered-delay-2">
+                <a href="contact.html" class="bg-white text-primary hover:bg-accent font-bold py-3 px-8 rounded-full inline-block transition">Request Custom Order</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-secondary text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold font-display tracking-wider mb-6">CRUSTY<span class="text-highlight">CRUST</span></h3>
+                    <p class="mb-6">Artisan breads and pastries crafted with love and the finest ingredients.</p>
+                    
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="hover:text-highlight transition">Home</a></li>
+                        <li><a href="about.html" class="hover:text-highlight transition">About Us</a></li>
+                        <li><a href="products.html" class="hover:text-highlight transition">Products</a></li>
+                        <li><a href="contact.html" class="hover:text-highlight transition">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-6">Products</h4>
+                    <ul class="space-y-3">
+                        <li><a href="products.html#breads" class="hover:text-highlight transition">Artisan Breads</a></li>
+                        <li><a href="products.html#pastries" class="hover:text-highlight transition">Pastries</a></li>
+                        <li><a href="products.html#cakes" class="hover:text-highlight transition">Cakes</a></li>
+                        <li><a href="contact.html" class="hover:text-highlight transition">Custom Orders</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-6">Hours</h4>
+                    <ul class="space-y-3">
+                        <li>Monday - Friday: 7am - 10pm</li>
+                        <li>Saturday: 9am - 12am</li>
+                        <li>Sunday: 9am - 11pm</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-600 mt-12 pt-8 text-center">
+                <p>&copy; 2025 Crusty Crust Bakery. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Fade-in Animation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initial animations for header
+            const headerElements = document.querySelectorAll('header .fade-in');
+            headerElements.forEach(el => {
+                setTimeout(() => {
+                    el.classList.add('appear');
+                }, 300);
+            });
+            
+            // Scroll animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('appear');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            document.querySelectorAll('section .fade-in').forEach(el => {
+                observer.observe(el);
+            });
+        });
+        
+        // Product Filtering
+        const filterButtons = document.querySelectorAll('.filter-button');
+        const productItems = document.querySelectorAll('.product-item');
+        const noResults = document.getElementById('no-results');
+        const productSearch = document.getElementById('product-search');
+        
+        // Filter by category
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                const category = button.dataset.category;
+                
+                filterProducts();
+            });
+        });
+        
+        // Search functionality
+        productSearch.addEventListener('input', filterProducts);
+        
+        function filterProducts() {
+            const searchTerm = productSearch.value.toLowerCase();
+            const activeCategory = document.querySelector('.filter-button.active').dataset.category;
+            
+            let visibleCount = 0;
+            
+            productItems.forEach(item => {
+                const category = item.dataset.category;
+                const title = item.querySelector('h3').textContent.toLowerCase();
+                const description = item.querySelector('p').textContent.toLowerCase();
+                
+                const matchesCategory = activeCategory === 'all' || category === activeCategory;
+                const matchesSearch = title.includes(searchTerm) || description.includes(searchTerm);
+                
+                if (matchesCategory && matchesSearch) {
+                    item.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            
+            // Show/hide no results message
+            if (visibleCount === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Crusty Crust Bakery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2A4365', // Deep blue
+                        secondary: '#4A5568', // Gray
+                        accent: '#EDF2F7', // Light gray
+                        highlight: '#ED8936', // Orange accent
+                        light: '#F7FAFC'
+                    },
+                    fontFamily: {
+                        'sans': ['Poppins', 'sans-serif'],
+                        'display': ['Montserrat', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #F7FAFC;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .page-header {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('./assets/about1.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .fade-in.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .staggered-delay-1 {
+            transition-delay: 0.1s;
+        }
+        
+        .staggered-delay-2 {
+            transition-delay: 0.2s;
+        }
+        
+        .staggered-delay-3 {
+            transition-delay: 0.3s;
+        }
+        
+        .nav-link {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #ED8936;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            transform: translateX(0);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background-color: #ED8936;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 0.5rem;
+            top: 1.5rem;
+            width: 2px;
+            height: calc(100% + 1rem);
+            background-color: #E2E8F0;
+        }
+        
+        .timeline-item:last-child::after {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center">
+                    <span class="text-primary text-2xl font-bold font-display tracking-wider">CRUSTY<span class="text-highlight">CRUST</span></span>
+                </a>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link text-secondary hover:text-primary transition">Home</a>
+                    <a href="about.html" class="nav-link text-primary font-medium">About</a>
+                    <a href="products.html" class="nav-link text-secondary hover:text-primary transition">Products</a>
+                    <a href="contact.html" class="nav-link text-secondary hover:text-primary transition">Contact</a>
+                </div>
+                
+                <button id="mobile-menu-button" class="md:hidden text-secondary focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden mt-4 pb-4">
+                <a href="index.html" class="block py-2 text-secondary hover:text-primary transition">Home</a>
+                <a href="about.html" class="block py-2 text-primary font-medium">About</a>
+                <a href="products.html" class="block py-2 text-secondary hover:text-primary transition">Products</a>
+                <a href="contact.html" class="block py-2 text-secondary hover:text-primary transition">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header py-24 text-center text-white">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4 fade-in">Our Story</h1>
+        <p class="text-xl max-w-3xl mx-auto px-4 fade-in staggered-delay-1">Discover the passion and craftsmanship behind Crusty Crust Bakery</p>
+    </header>
+
+    <!-- Our Story Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-12">
+                    <h2 class="text-3xl font-bold text-primary mb-8 fade-in">The Crusty Crust Journey</h2>
+                    
+                    <div class="space-y-6 fade-in staggered-delay-1">
+                        <div class="timeline-item">
+                            <h3 class="text-xl font-bold text-primary">2018</h3>
+                            <p class="text-secondary">Crusty Crust started in Shivani Nagar’s home kitchen, supplying freshly baked sourdough and pastries to a few local cafés and friends in the neighborhood.</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h3 class="text-xl font-bold text-primary">2020</h3>
+                            <p class="text-secondary">Word of mouth spread, and we began partnering with more cafés while setting up our first pop-up stalls at weekend markets and small events around town.</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h3 class="text-xl font-bold text-primary">2022</h3>
+                            <p class="text-secondary">With a loyal following, Crusty Crust expanded its offerings to include custom event catering and seasonal specialties, becoming a favorite at weddings and community fairs.</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h3 class="text-xl font-bold text-primary">2024</h3>
+                            <p class="text-secondary">Launched our online ordering system and expanded delivery services to reach more customers.</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h3 class="text-xl font-bold text-primary">Today</h3>
+                            <p class="text-secondary">Still proudly home-based,continuing to innovate while staying true to our artisanal roots, with a focus on quality and sustainability.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2 fade-in staggered-delay-2">
+                    <div class="relative">
+                        <img src="./assets/final3.jpg" alt="Bakery History" class="rounded-lg shadow-xl">
+                        <div class="absolute -bottom-6 -right-6 bg-highlight text-white p-6 rounded-lg shadow-lg max-w-xs">
+                            <p class="italic">"Our mission is to create exceptional baked goods that bring joy to our community while respecting traditional methods and sustainable practices."</p>
+                            <p class="font-bold mt-4">— Shivani Nagar, Founder</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Meet the Team -->
+    <section class="py-20 bg-accent">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-primary text-center mb-16 fade-in">Meet Our Team</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                
+                </div>
+                
+                <!-- Team Member 2 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg fade-in staggered-delay-1">
+                    <div class="h-80 overflow-hidden">
+                        <img src="./assets/wchef2.png" alt="Shivani Nagar" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-primary mb-2">Shivani Nagar</h3>
+                        <p class="text-highlight font-medium mb-4">Artisan Bread Specialist,Founder</p>
+                        <p class="text-secondary">Shivani has dedicated her career to the art of bread making, specializing in long-fermentation sourdoughs and traditional breads passed down from her family.</p>
+                    </div>
+                </div>
+                
+                <!-- Team Member 3 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg fade-in staggered-delay-2">
+                    <div class="h-80 overflow-hidden">
+                        <img src="./assets/cropped_image (6).png" alt="David Chacko" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-primary mb-2">David Chacko</h3>
+                        <p class="text-highlight font-medium mb-4">Pastry Chef,Marketing Head</p>
+                        <p class="text-secondary">With a background in fine dining and a passion for French pastry, David  brings creativity and precision to our pastry selection, developing new recipes each season.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Philosophy -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0 fade-in">
+                    <img src="./assets/abouta1.jpg" alt="Fresh Ingredients" class="rounded-lg shadow-xl">
+                </div>
+                
+                <div class="md:w-1/2 md:pl-12">
+                    <h2 class="text-3xl font-bold text-primary mb-8 fade-in staggered-delay-1">Our Philosophy</h2>
+                    
+                    <div class="space-y-6 fade-in staggered-delay-2">
+                        <div class="bg-accent p-6 rounded-lg">
+                            <h3 class="text-xl font-bold text-primary mb-3">Quality Ingredients</h3>
+                            <p class="text-secondary">We source the finest ingredients, including organic flour, local dairy, and seasonal produce. We believe that exceptional baked goods start with exceptional ingredients.</p>
+                        </div>
+                        
+                        <div class="bg-accent p-6 rounded-lg">
+                            <h3 class="text-xl font-bold text-primary mb-3">Traditional Methods</h3>
+                            <p class="text-secondary">We honor time-tested baking techniques, including long fermentation for our breads and hand-lamination for our pastries. Some things simply can't be rushed.</p>
+                        </div>
+                        
+                        <div class="bg-accent p-6 rounded-lg">
+                            <h3 class="text-xl font-bold text-primary mb-3">Sustainability</h3>
+                            <p class="text-secondary">We're committed to reducing our environmental impact through composting, minimal packaging, and supporting local farmers who practice sustainable agriculture.</p>
+                        </div>
+                        
+                        <div class="bg-accent p-6 rounded-lg">
+                            <h3 class="text-xl font-bold text-primary mb-3">Community</h3>
+                            <p class="text-secondary">We believe in being a positive force in our community, from donating unsold bread to local food banks to hosting workshops that share our knowledge and passion.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
+
+    <!-- Footer -->
+    <footer class="bg-secondary text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold font-display tracking-wider mb-6">CRUSTY<span class="text-highlight">CRUST</span></h3>
+                    <p class="mb-6">Artisan breads and pastries crafted with love and the finest ingredients.</p>
+                    <div class="flex space-x-4">
+                      
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="hover:text-highlight transition">Home</a></li>
+                        <li><a href="about.html" class="hover:text-highlight transition">About Us</a></li>
+                        <li><a href="products.html" class="hover:text-highlight transition">Products</a></li>
+                        <li><a href="contact.html" class="hover:text-highlight transition">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-6">Products</h4>
+                    <ul class="space-y-3">
+                        <li><a href="products.html#breads" class="hover:text-highlight transition">Artisan Breads</a></li>
+                        <li><a href="products.html#pastries" class="hover:text-highlight transition">Pastries</a></li>
+                        <li><a href="products.html#cakes" class="hover:text-highlight transition">Cakes</a></li>
+                        <li><a href="contact.html" class="hover:text-highlight transition">Custom Orders</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-6">Hours</h4>
+                    <ul class="space-y-3">
+                        <li>Monday - Friday: 7am - 10pm</li>
+                        <li>Saturday: 9am - 12am</li>
+                        <li>Sunday: 9am - 11pm</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-600 mt-12 pt-8 text-center">
+                <p>&copy; 2025 Crusty Crust Bakery. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Fade-in Animation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initial animations for header
+            const headerElements = document.querySelectorAll('header .fade-in');
+            headerElements.forEach(el => {
+                setTimeout(() => {
+                    el.classList.add('appear');
+                }, 300);
+            });
+            
+            // Scroll animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('appear');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            document.querySelectorAll('section .fade-in').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
